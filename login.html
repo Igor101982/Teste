@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>AfriWallet - Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container login-container">
+        <div class="logo animated-bounce"></div>
+        <h1>AfriWallet</h1>
+        <form id="loginForm" autocomplete="off">
+            <input type="email" id="login-email" placeholder="Email" required>
+            <input type="password" id="login-password" placeholder="Senha" required>
+            <button type="submit">Entrar</button>
+            <div id="login-feedback"></div>
+        </form>
+        <a href="signup.html">Criar conta</a>
+        <a href="#" id="forgot-password-link">Esqueceu a senha?</a>
+        <div id="loading" class="hidden"></div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>

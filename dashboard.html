@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>AfriWallet - Painel</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <span class="title">AfriWallet</span>
+    <ul>
+      <li><a href="#" id="nav-dashboard">Dashboard</a></li>
+      <li><a href="#" id="nav-historico">Histórico</a></li>
+      <li><a href="#" id="nav-perfil">Perfil</a></li>
+      <li><a href="login.html" id="logout">Sair</a></li>
+    </ul>
+  </nav>
+  <div class="container dashboard-container">
+    <div class="dashboard-cards">
+      <div class="card balance-card">
+        <span>Saldo</span>
+        <h2 id="saldo">0 MZN</h2>
+      </div>
+      <div class="card stat-card">
+        <span>Transações</span>
+        <h2 id="contador-transacoes">0</h2>
+      </div>
+    </div>
+    <div class="usuario-header">
+      <div class="avatar">
+        <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+          <circle cx="19" cy="19" r="19" fill="#00968822"/>
+          <path d="M19 22.5c-5 0-9 2-9 4.5V30h18v-3c0-2.5-4-4.5-9-4.5ZM19 20a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" fill="#00ffe7"/>
+        </svg>
+      </div>
+      <div>
+        <h2 class="username">Olá, <span id="username"></span>!</h2>
+        <div class="user-email" id="user-email"></div>
+      </div>
+    </div>
+    <div class="acoes">
+      <button id="btn-depositar">Depositar</button>
+      <button id="btn-levantar">Levantar</button>
+      <button id="btn-enviar">Enviar</button>
+    </div>
+    <div class="dashboard-section">
+      <h3>Histórico recente</h3>
+      <ul class="history-list" id="history-list"></ul>
+      <button class="mini-btn" id="ver-tudo">Ver tudo</button>
+      <div class="dashboard-section">
+  <h3>Histórico</h3>
+  <div class="historico-filtros">
+    <select id="filtro-tipo">
+      <option value="">Todos</option>
+      <option value="enviar">Enviado</option>
+      <option value="receber">Recebido</option>
+      <option value="levantar">Levantamento</option>
+      <option value="depositar">Depósito</option>
+    </select>
+    <select id="filtro-via">
+      <option value="">Todas as vias</option>
+      <option value="M-PESA">M-PESA</option>
+      <option value="E-Mola">E-Mola</option>
+      <option value="PayPal">PayPal</option>
+    </select>
+    <input type="text" id="busca-historico" placeholder="Buscar valor/usuário">
+  </div>
+  <ul class="history-list" id="history-list"></ul>
+</div>
+    </div>
+  </div>
+
+  <!-- Modal DEPOSITAR -->
+  <div id="modal-depositar" class="modal hidden">
+    <div class="modal-content">
+      <span class="modal-close" id="depositar-close">&times;</span>
+      <h2>Depositar saldo</h2>
+      <div id="depositar-step1">
+        <div class="via-opcoes">
+          <button class="via-btn" data-via="M-PESA">M-PESA</button>
+          <button class="via-btn" data-via="E-Mola">E-Mola</button>
+          <button class="via-btn" data-via="PayPal">PayPal</button>
+        </div>
+      </div>
+      <form id="depositar-form" class="hidden">
+        <input type="number" id="depositar-valor" placeholder="Valor (MZN)" min="1" required>
+        <input type="hidden" id="depositar-via">
+        <div class="escolhido-via" id="depositar-via-label"></div>
+        <button type="submit">Depositar</button>
+        <div id="depositar-feedback"></div>
+      </form>
+    </div>
+  </div>
+  <!-- Modal LEVANTAR -->
+  <div id="modal-levantar" class="modal hidden">
+    <div class="modal-content">
+      <span class="modal-close" id="levantar-close">&times;</span>
+      <h2>Levantar saldo</h2>
+      <div id="levantar-step1">
+        <div class="via-opcoes">
+          <button class="via-btn" data-via="M-PESA">M-PESA</button>
+          <button class="via-btn" data-via="E-Mola">E-Mola</button>
+          <button class="via-btn" data-via="PayPal">PayPal</button>
+        </div>
+      </div>
+      <form id="levantar-form" class="hidden">
+        <input type="number" id="levantar-valor" placeholder="Valor (MZN)" min="1" required>
+        <input type="hidden" id="levantar-via">
+        <div class="escolhido-via" id="levantar-via-label"></div>
+        <button type="submit">Levantar</button>
+        <div id="levantar-feedback"></div>
+      </form>
+    </div>
+  </div>
+  <!-- Modal ENVIAR -->
+  <div id="modal-envio" class="modal hidden">
+    <div class="modal-content">
+      <span class="modal-close" id="envio-close">&times;</span>
+      <h2>Enviar dinheiro</h2>
+      <form id="enviar-form">
+        <input type="text" id="envio-user" placeholder="Usuário destinatário" required>
+        <input type="number" id="envio-valor" placeholder="Valor (MZN)" min="1" required>
+        <select id="envio-via" required>
+          <option disabled selected value="">Via</option>
+          <option>M-PESA</option>
+          <option>E-Mola</option>
+          <option>PayPal</option>
+        </select>
+        <button type="submit">Enviar</button>
+        <div id="envio-feedback"></div>
+      </form>
+    </div>
+  </div>
+  <!-- Modal PERFIL -->
+  <div id="modal-perfil" class="modal hidden">
+    <div class="modal-content">
+      <span class="modal-close" id="perfil-close">&times;</span>
+      <h2>Meu Perfil</h2>
+      <form id="perfil-form">
+        <input type="text" id="perfil-username" placeholder="Nome de usuário" required>
+        <input type="email" id="perfil-email" placeholder="Email" required>
+        <input type="password" id="perfil-nova-senha" placeholder="Nova senha (opcional)">
+        <button type="submit">Salvar alterações</button>
+        <div id="perfil-feedback"></div>
+      </form>
+    </div>
+  </div>
+
+  <div id="loading" class="hidden"><div class="spinner"></div></div>
+  <audio id="notif-audio" src="https://cdn.pixabay.com/audio/2022/08/20/audio_12bfe5f9ce.mp3"></audio>
+  <script src="scruipt.js"></script>
+</body>
+</html>
